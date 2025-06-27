@@ -35,11 +35,8 @@ const extractPosts = () => {
   posts.forEach(post => {
     extractedTexts.push({ text: post.innerText.trim(), score: null });
   });
-
-  return extractedTexts;
-};
-
-const FactCheckComponent = ({ posts }) => {
+  
+  
   return (
     <div style={{ marginTop: "20px" }}>
       <h2>投稿のファクトチェック結果:</h2>
