@@ -1,0 +1,36 @@
+/* スピナーのスタイル */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #007bff;
+  animation: spin 1s ease infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* オーバーレイの基本的なスタイル（content.jsに直接記述されているものと重複しないように注意） */
+#veritas-lens-overlay h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #0056b3;
+  text-align: center;
+}
+
+#veritas-lens-overlay p {
+  margin-bottom: 5px;
+}
+
+#veritas-lens-overlay strong {
+  color: #555;
+}
