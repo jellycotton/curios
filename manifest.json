@@ -5,7 +5,8 @@
   "description": "選択したテキストを右クリックして、リアルタイムでファクトチェックします。",
   "permissions": [
     "contextMenus",
-    "scripting"
+    "scripting",
+    "activeTab"
   ],
   "background": {
     "service_worker": "background.js"
