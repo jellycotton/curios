@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "veritas-lens-fact-check" && info.selectionText) {
     // 右クリックからのファクトチェック
-    performFactCheck(info.selectionText, tab.id);
+    performFactCheck(info.selectionText, tab.id, null);
   }
 });
 
@@ -20,16 +20,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "factCheckFromLongPress" && request.query) {
     // 長押しからのファクトチェック
     if (sender.tab && sender.tab.id) {
-      performFactCheck(request.query, sender.tab.id);
+      performFactCheck(request.query, sender.tab.id, request.position);
     }
   }
 });
 
 // ファクトチェックを実行する共通関数
-async function performFactCheck(query, tabId) {
+async function performFactCheck(query, tabId, position = null) {
   // ローディング表示をcontent.jsに送信
   if (tabId) {
-    chrome.tabs.sendMessage(tabId, { action: "showLoading" });
+    chrome.tabs.sendMessage(tabId, { action: "showLoading", position: position });
   }
 
   try {
@@ -52,7 +52,8 @@ async function performFactCheck(query, tabId) {
     if (tabId) {
       chrome.tabs.sendMessage(tabId, {
         action: "displayFactCheckResult",
-        result: data.result
+        result: data.result,
+        position: position
       });
     }
 
@@ -61,8 +62,9 @@ async function performFactCheck(query, tabId) {
     // エラーもcontent.jsに送信して表示
     if (tabId) {
       chrome.tabs.sendMessage(tabId, {
-        action: "displayFactCheckResult",
-        result: `【評価】: エラー\n【解説】: ファクトチェック中にエラーが発生しました。\n【根拠・情報源】: ${error.message}`
+        action: "displayFactCheckResult",        result: `【評価】: エラー
+【解説】: ファクトチェック中にエラーが発生しました。
+【根拠・情報源】: ${error.message}`,        position: position
       });
     }
   }
