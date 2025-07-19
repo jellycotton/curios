@@ -100,8 +100,8 @@ const Browser = () => {
         textAlign: "center"
       }}
     >
-      <img src={logo} alt="Veritas Logo" style={{ width: "150px", height: "auto" }} />
-      <h1>Veritas</h1>
+      <img src={logo} alt="Curios Logo" style={{ width: "150px", height: "auto" }} />
+      <h1>Curios</h1>
       <p>ブラウザ拡張機能のUIモックアップ</p>
 
       {/* URL入力や移動ボタンはUIのイメージとして残します */}

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Veritas Lens",
+  "name": "Curios",
   "version": "0.1.0",
   "description": "選択したテキストを右クリックして、リアルタイムでファクトチェックします。",
   "permissions": [
@@ -24,7 +24,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["VeritasLens.png"],
+      "resources": ["Curios.png"],
       "matches": ["<all_urls>"]
     }
   ]
