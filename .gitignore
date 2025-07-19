@@ -27,3 +27,6 @@ dist-ssr
 /config/
 /secrets/
 /.env
+
+# プライベート書類フォルダを除外
+/書類/
