@@ -116,7 +116,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 最新モデル名は Googleの公式Gemini APIトップページ（https://ai.google.dev/）または Google Cloud Vertex AIドキュメント（https://cloud.google.com/vertex-ai/docs/generative-ai）を参照してください。
 
 ## 開発・著作
-じぇりー（jelly）
+じぇりー（Jelly）
 
 - Bluesky: [https://bsky.app/profile/jellycotton.bsky.social]
 
@@ -124,5 +124,5 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 ※ 本プロジェクトのアイコン画像はOSS・非商用利用を前提として公開しており、商用利用や再配布時には各AIサービスの利用規約および商用可否を必ず確認してください。
 
 ## ライセンス
-Copyright (c) 2025 Jelly  
+Copyright (c) 2025 じぇりー (Jelly)  
 Licensed under the MIT License
