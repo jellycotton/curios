@@ -80,7 +80,7 @@ function displayLoadingOverlay(position) {
   const overlay = createBaseOverlay(position); // ★ 位置を渡す
   overlay.style.width = "200px";
   overlay.innerHTML = `
-    <img src="${chrome.runtime.getURL('VeritasLens.png')}" alt="Veritas Lens Logo" style="width: 80px; margin-bottom: 10px;">
+    <img src="${chrome.runtime.getURL('Curios.png')}" alt="Curios Logo" style="width: 100px; display: block; margin: 0 auto 15px auto;">
     <p style="font-weight: bold; color: #007bff;">AIが情報を分析中...</p>
     <div class="spinner"></div>
   `;
@@ -93,10 +93,14 @@ function displayOverlay(result, position) {
     existingOverlay.remove();
   }
   const overlay = createBaseOverlay(position); // ★ 位置を渡す
+  // オーバーレイの内部構造をFlexboxで変更
+  overlay.style.display = 'flex';
+  overlay.style.flexDirection = 'column';
+
   overlay.innerHTML = `
     <img src="${chrome.runtime.getURL('Curios.png')}" alt="Curios Logo" style="width: 100px; display: block; margin: 0 auto 15px auto;">
-    <div>${parseAndStyleResult(result)}</div>
-    <button id="veritas-lens-close-btn" style="margin-top: 15px; padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%;">閉じる</button>
+    <div style="flex-grow: 1; overflow-y: auto; padding-bottom: 15px;">${parseAndStyleResult(result)}</div>
+    <button id="curios-close-btn" style="margin-top: auto; padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%;">閉じる</button>
   `;
   document.body.appendChild(overlay);
 
@@ -109,7 +113,7 @@ function createBaseOverlay(position) {
   overlay.id = "curios-overlay";
   // ★ 位置調整ロジック
   const overlayWidth = 350;
-  const overlayHeight = 400; // 仮の高さ
+  // overlayHeight を削除し、max-height を調整
   let top = position.y + 15;
   let left = position.x + 15;
 
@@ -117,16 +121,19 @@ function createBaseOverlay(position) {
   if (left + overlayWidth > window.innerWidth) {
     left = window.innerWidth - overlayWidth - 20;
   }
-  if (top + overlayHeight > window.innerHeight) {
-    top = window.innerHeight - overlayHeight - 20;
-  }
+  // max-height を 90vh に増やし、bottom を追加して下からの位置を調整
+  // top + overlayHeight > window.innerHeight のチェックは不要になる
+  // if (top + overlayHeight > window.innerHeight) {
+  //   top = window.innerHeight - overlayHeight - 20;
+  // }
 
   overlay.style.cssText = `
     position: fixed;
     top: ${top}px;
     left: ${left}px;
     width: ${overlayWidth}px;
-    max-height: 80vh;
+    max-height: 90vh; /* 高さを少し増やす */
+    bottom: 10px; /* 画面下からの距離を確保 */
     background-color: rgba(255, 255, 255, 0.98);
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -137,7 +144,7 @@ function createBaseOverlay(position) {
     font-size: 14px;
     color: #333;
     line-height: 1.6;
-    overflow-y: auto;
+    /* overflow-y: auto; */ /* コンテンツがはみ出したらスクロール */
     text-align: center;
   `;
   return overlay;

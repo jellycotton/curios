@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Curios Demo Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    #default-text {
+      max-width: 600px;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #fff8dc;
+      border-left: 5px solid #ffa500;
+    }
+    #chat-box {
+      width: 100%;
+      max-width: 600px;
+      height: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    #user-input {
+      width: 100%;
+      max-width: 600px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    #send-btn, #clear-btn {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+    }
+    #send-btn {
+      background-color: #4CAF50;
+    }
+    #send-btn:hover {
+      background-color: #45a049;
+    }
+    #clear-btn {
+      background-color: #f44336;
+    }
+    #clear-btn:hover {
+      background-color: #e53935;
+    }
+  </style>
+</head>
+<body>
+  <h1>Curios デモ用ページ</h1>
+
+  <div id="default-text">
+    <p>これはオーバーレイを確認するためのページです。</p>
+    <p>ダミー文章を送信し実際の挙動を確かめましょう。</p>
+  </div>
+
+  <div id="chat-box">
+    <!-- ユーザーが送信したメッセージがここに入る -->
+  </div>
+
+  <textarea id="user-input" rows="3" placeholder="ここにテキストを入力..."></textarea>
+  <br>
+  <button id="send-btn">送信</button>
+  <button id="clear-btn">クリア</button>
+
+  <script>
+    const sendBtn = document.getElementById('send-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+
+    sendBtn.addEventListener('click', function() {
+      const input = userInput.value.trim();
+      if (input !== '') {
+        const p = document.createElement('p');
+        p.textContent = input;
+        chatBox.appendChild(p);
+        userInput.value = '';
+      }
+    });
+
+    clearBtn.addEventListener('click', function() {
+      chatBox.innerHTML = '';
+    });
+  </script>
+</body>
+</html>
