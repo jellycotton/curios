@@ -1,8 +1,6 @@
 
 # Curios
 
-🇺🇸 English version → [README_EN.md](./README_EN.md)
-
 > あなたの好奇心を、AIとつなぐ。
 
 ## コンセプト
