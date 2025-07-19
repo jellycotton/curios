@@ -37,6 +37,12 @@ Google Gemini APIおよびGoogle Custom Search APIの利用には、Google Cloud
 - https://cloud.google.com/vertex-ai/pricing
 - https://developers.google.com/custom-search/v1/overview
 
+## デモ
+
+以下はCuriosの動作デモです。
+
+![Curios Demo](./demo.gif)
+
 ## 概要
 現在のCuriosは、Google Generative AI (gemini-2.5-pro, gemini-2.5-flash など) とGoogle Custom Search APIを用いてWebページ上のテキストのファクトチェックを行うブラウザ拡張機能として動作します。
 ユーザーが選択したテキストや長押ししたテキストについて情報の真偽を検証し、その結果をWebページ上にオーバーレイ表示します。
@@ -45,6 +51,7 @@ Google Gemini APIおよびGoogle Custom Search APIの利用には、Google Cloud
 Curiosはファクトチェックデモを例示として搭載していますが、
 サーバー側（server.js）のプロンプトを変更することで、
 要約・翻訳・感情分析など他のAIチェック機能に自由に改造可能です。
+詳細はユーザー側でお楽しみください。
 
 **可能性の例（ユーザー改造による拡張例）**
 ✅ 記事の真偽分析 → 偏向検出やフェイクニュース対応へ  
@@ -82,29 +89,8 @@ CSE_ID=あなたのCustom_Search_Engine_ID
 ```
 
 ### 4. バックエンドサーバーの起動
-ターミナルまたはコマンドプロンプトを開き、プロジェクトをクローンしたディレクトリ（例: curios）に移動してください。
-
-**例（Windows）:**
 ```bash
-cd C:\Users\YOUR_USERNAME\Documents\curios
-node server.js
-```
-
-**例（Mac/Linux）:**
-```bash
-cd ~/Documents/curios
-node server.js
-```
-
-※プロジェクトルートから直接起動したい場合は、`package.json` に以下のスクリプトを追加してください。
-```json
-"scripts": {
-  "start": "node server.js"
-}
-```
-その場合は以下を実行できます。
-```bash
-npm run start
+npm start
 ```
 
 ### 5. フロントエンド開発サーバーの起動 (任意)
@@ -132,10 +118,11 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 ## 開発・著作
 じぇりー（jelly）
 
+- Bluesky: [https://bsky.app/profile/jellycotton.bsky.social]
+
 ※ 本プロジェクトのアイコン画像は、ChatGPT、Gemini、Copilotなど複数のAIツールを用いて作成したオリジナルのAI生成画像です。  
 ※ 本プロジェクトのアイコン画像はOSS・非商用利用を前提として公開しており、商用利用や再配布時には各AIサービスの利用規約および商用可否を必ず確認してください。
 
-## 📜 ライセンス
-
-このプロジェクトは MIT License の下で公開されています。  
-詳細は [LICENSE](./LICENSE) ファイルを参照してください。
+## ライセンス
+Copyright (c) 2025 Jelly  
+Licensed under the MIT License
