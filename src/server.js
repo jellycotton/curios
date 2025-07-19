@@ -56,7 +56,7 @@ async function googleSearch(query) {
 
 // ★ Gemini APIの初期化
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.json());
