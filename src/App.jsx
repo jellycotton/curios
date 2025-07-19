@@ -1,5 +1,4 @@
 import "./App.css";
-import logo from "./assets/A_magnifying_glass_w.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -100,7 +99,6 @@ const Browser = () => {
         textAlign: "center"
       }}
     >
-      <img src={logo} alt="Curios Logo" style={{ width: "150px", height: "auto" }} />
       <h1>Curios</h1>
       <p>ブラウザ拡張機能のUIモックアップ</p>
 
