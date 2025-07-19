@@ -30,3 +30,9 @@ dist-ssr
 
 # プライベート書類フォルダを除外
 /書類/
+
+# 開発用テストファイルを除外
+*Test.js
+*Test.js.txt
+temp*
+*.tmp
