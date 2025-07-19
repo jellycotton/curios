@@ -73,7 +73,7 @@ document.addEventListener('contextmenu', (e) => {
 // --- オーバーレイ表示関数の修正 ---
 
 function displayLoadingOverlay(position) {
-  const existingOverlay = document.getElementById("veritas-lens-overlay");
+  const existingOverlay = document.getElementById("curios-overlay");
   if (existingOverlay) {
     existingOverlay.remove();
   }
@@ -88,25 +88,25 @@ function displayLoadingOverlay(position) {
 }
 
 function displayOverlay(result, position) {
-  const existingOverlay = document.getElementById("veritas-lens-overlay");
+  const existingOverlay = document.getElementById("curios-overlay");
   if (existingOverlay) {
     existingOverlay.remove();
   }
   const overlay = createBaseOverlay(position); // ★ 位置を渡す
   overlay.innerHTML = `
-    <img src="${chrome.runtime.getURL('VeritasLens.png')}" alt="Veritas Lens Logo" style="width: 100px; display: block; margin: 0 auto 15px auto;">
+    <img src="${chrome.runtime.getURL('Curios.png')}" alt="Curios Logo" style="width: 100px; display: block; margin: 0 auto 15px auto;">
     <div>${parseAndStyleResult(result)}</div>
     <button id="veritas-lens-close-btn" style="margin-top: 15px; padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%;">閉じる</button>
   `;
   document.body.appendChild(overlay);
 
   // 閉じるボタンにイベントリスナーを追加
-  document.getElementById("veritas-lens-close-btn").onclick = () => overlay.remove();
+  document.getElementById("curios-close-btn").onclick = () => overlay.remove();
 }
 
 function createBaseOverlay(position) {
   const overlay = document.createElement("div");
-  overlay.id = "veritas-lens-overlay";
+  overlay.id = "curios-overlay";
   // ★ 位置調整ロジック
   const overlayWidth = 350;
   const overlayHeight = 400; // 仮の高さ
