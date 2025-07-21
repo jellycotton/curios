@@ -2,7 +2,7 @@
 
 🇯🇵 日本語版 → [README.md](./README.md)
 
-> Connect your curiosity with AI.
+> Curiosity-driven AI.
 
 ## Concept
 Curios is an **open AI integration framework designed to allow users to freely embed, modify, and experiment with AI check functions**.  
