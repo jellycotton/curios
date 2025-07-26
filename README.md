@@ -2,7 +2,7 @@
 
 🇺🇸 English version → [README_EN.md](./README_EN.md)
 
-![Curios Demo](./demo.gif)
+![Curios Demo](./DemoAnimation.gif)
 *↑ 長押しでAI分析、その場でオーバーレイ表示*
 
 # ワンアクション
