@@ -69,7 +69,14 @@ app.post('/fact-check', async (req, res) => {
     return res.status(400).json({ error: 'Query is required' });
   }
 
+  // テキストの長さをチェック
+  if (query.length > 2000) {
+    return res.status(400).json({ error: 'Query too long. Maximum 2000 characters allowed.' });
+  }
+
   try {
+    console.log(`[${new Date().toISOString()}] Fact-checking request: "${query.substring(0, 100)}${query.length > 100 ? '...' : ''}"`);
+    
     // Web検索を実行
     const searchResults = await googleSearch(query);
     let webContentString = 'なし';
@@ -77,36 +84,50 @@ app.post('/fact-check', async (req, res) => {
       webContentString = searchResults.map(item => `タイトル: ${item.title}\nスニペット: ${item.snippet}\nURL: ${item.link}`).join('\n\n');
     }
 
-    // ★ AIへの指示（プロンプト）
+    // ★ AIへの指示（プロンプト）- より詳細で構造化された指示
     const prompt = `
-      以下のテキストについて、ファクトチェックを行ってください。
+      以下のテキストについて、正確で客観的なファクトチェックを行ってください。
       主張が事実に基づいているか、誤解を招く情報でないか、公平な視点で評価してください。
       提供されたWeb検索結果を参考にし、その情報源の信頼性も考慮して判断してください。
-      評価の根拠となる情報源や、関連する情報があれば、それも合わせて提示してください。
-      回答は簡潔に、以下の形式でまとめてください。
+      
+      回答は必ず以下の形式で、簡潔かつ分かりやすくまとめてください：
 
-      【評価】: (例: 誤り, ほぼ真実, 事実であるが文脈が必要, など)
-      【解説】: (評価の理由を具体的に説明)
-      【根拠・情報源】: (参考になったWeb検索結果のURLなど)
+      【評価】: (例: 事実, ほぼ事実, 部分的に正しい, 誤りの可能性, 誤り, 情報不足, など)
+      【解説】: (評価の理由を具体的に説明。150文字以内で)
+      【根拠・情報源】: (参考になったWeb検索結果のURLや、その他の根拠)
 
       ---
-      テキスト: "${query}"
+      検証対象テキスト: "${query}"
       ---
       Web検索結果:
       ${webContentString}
       ---
     `;
 
-
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
+    console.log(`[${new Date().toISOString()}] Fact-check completed successfully`);
     res.json({ result: text });
 
   } catch (error) {
-    console.error('Error with Gemini API:', error);
-    res.status(500).json({ error: 'Failed to fetch data from Gemini API' });
+    console.error(`[${new Date().toISOString()}] Error with Gemini API:`, error);
+    
+    // より詳細なエラー情報を提供
+    let errorMessage = 'ファクトチェック中にエラーが発生しました。';
+    if (error.message.includes('API_KEY')) {
+      errorMessage = 'API認証エラーが発生しました。設定を確認してください。';
+    } else if (error.message.includes('QUOTA')) {
+      errorMessage = 'API利用制限に達しました。しばらく時間をおいてから再試行してください。';
+    } else if (error.message.includes('TIMEOUT')) {
+      errorMessage = 'タイムアウトエラーが発生しました。再試行してください。';
+    }
+    
+    res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 // ----------------------------------------------------

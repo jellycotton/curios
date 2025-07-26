@@ -1,26 +1,6 @@
 # Curios
 
-🇯🇵 日本語版 → ## From the DeveI am a developer with no prior knowledge.
-I am aware that what I've created is imperfect and unreliable.
-
-But even so, I aim to continue moving forward,  
-using AI as a tool,  
-learning, experimenting,  
-and bringing my ideas to reality.
-
-Curios is one example of such practice.
-This project was conceived and designed by me (Jelly),  
-and almost all the implementation, refinement, and adjustment were shaped with the help of AI assistants.
-
-I am a developer with no prior knowledge.
-I am aware that what I've created is imperfect and unreliable.
-
-But even so, I aim to continue moving forward,  
-using AI as a tool,  
-learning, experimenting,  
-and bringing my ideas to reality.
-
-Curios is one example of such practice.](./README.md)
+🇯🇵 日本語版 → [README.md](./README.md)
 
 ![Curios Demo](./demo.gif)
 *↑ Long-press for AI analysis, instant overlay display*
