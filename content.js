@@ -36,8 +36,8 @@ document.addEventListener('mousemove', (e) => {
 }, true); // キャプチャフェーズでイベントを取得
 
 document.addEventListener('mousedown', (e) => {
-  // 左クリック(e.button === 0) または 右クリック(e.button === 2) の場合にのみ作動
-  if (e.button !== 0 && e.button !== 2) return;
+  // 右クリック(e.button === 2) の場合にのみ作動
+  if (e.button !== 2) return;
 
   // 選択されたテキストを取得
   selectedText = window.getSelection().toString().trim();
