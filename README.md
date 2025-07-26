@@ -1,9 +1,19 @@
-
 # Curios
 
 🇺🇸 English version → [README_EN.md](./README_EN.md)
 
-> あなたの好奇心を、AIとつなぐ。
+![Curios Demo](./demo.gif)
+*↑ 長押しでAI分析、その場でオーバーレイ表示*
+
+# ワンアクション
+片手、長押し、オーバーレイ
+その場でAIを呼び出し、テキストを判定・分析・変換
+
+ファクトチェック？ 翻訳？ 偏向検出？  
+何をするかは好奇心と改造次第
+
+CuriosはAIを呼び出して試す体験そのものが面白く、  
+そこに実用性を載せれば日常を便利に変える可能性を秘めています
 
 ## コンセプト
 Curiosは、**ユーザーが自由にAIチェック機能を組み込み、改造・実験できることを前提とした、オープンなAI連携フレームワーク**です。
@@ -16,10 +26,11 @@ Webページ上のテキストに対してAIによる分析を行うブラウザ
 実装・整備・調整のほとんどをAIアシスタントの助けを借りて形にしました。
 
 私は知識のない開発者です。
+私は自分の作ったものが不完全で頼りないものであることを自覚しています。
 
-だからこそ、AIという道具を使い、
+しかしそれでも、AIという道具を使い、
 学びながら、試しながら、
-自分のアイデアを現実化するスタンスでこれからも進みます。
+自分のアイデアを現実化することを目標にこれからも進みます。
 
 Curiosはその実践例のひとつです。
 
@@ -38,12 +49,6 @@ Google Gemini APIおよびGoogle Custom Search APIの利用には、Google Cloud
 例:
 - https://cloud.google.com/vertex-ai/pricing
 - https://developers.google.com/custom-search/v1/overview
-
-## デモ
-
-以下はCuriosの動作デモです。
-
-![Curios Demo](./demo.gif)
 
 ## 概要
 現在のCuriosは、Google Generative AI (gemini-2.5-pro, gemini-2.5-flash など) とGoogle Custom Search APIを用いてWebページ上のテキストのファクトチェックを行うブラウザ拡張機能として動作します。
@@ -73,7 +78,7 @@ Curiosはファクトチェックデモを例示として搭載しています�
 
 ### 1. プロジェクトのクローン
 ```bash
-git clone [リポジトリのURL]
+git clone https://github.com/jellycotton/curios.git
 cd curios
 ```
 

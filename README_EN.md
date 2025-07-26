@@ -1,8 +1,39 @@
 # Curios
 
-🇯🇵 日本語版 → [README.md](./README.md)
+🇯🇵 日本語版 → ## From the DeveI am a developer with no prior knowledge.
+I am aware that what I've created is imperfect and unreliable.
 
-> Connect your curiosity with AI.
+But even so, I aim to continue moving forward,  
+using AI as a tool,  
+learning, experimenting,  
+and bringing my ideas to reality.
+
+Curios is one example of such practice.
+This project was conceived and designed by me (Jelly),  
+and almost all the implementation, refinement, and adjustment were shaped with the help of AI assistants.
+
+I am a developer with no prior knowledge.
+I am aware that what I've created is imperfect and unreliable.
+
+But even so, I aim to continue moving forward,  
+using AI as a tool,  
+learning, experimenting,  
+and bringing my ideas to reality.
+
+Curios is one example of such practice.](./README.md)
+
+![Curios Demo](./demo.gif)
+*↑ Long-press for AI analysis, instant overlay display*
+
+# One Action
+One hand, long press, overlay
+Instantly invoke AI to analyze, interpret, and transform text
+
+Fact-checking? Translation? Bias detection?  
+What you do depends on your curiosity and customization
+
+Curios makes the experience of calling upon AI and experimenting inherently enjoyable,  
+and when combined with practical functionality, it has the potential to transform daily life.
 
 ## Concept
 Curios is an **open AI integration framework designed to allow users to freely embed, modify, and experiment with AI check functions**.  
@@ -20,6 +51,49 @@ That’s why I use tools like AI,
 learning, trying, and transforming ideas into reality as I go.
 
 Curios is one example of such practice.
+
+## How to Setup
+> ⚠️ **Note**: This is the current development state. There are parts that don't work smoothly.
+
+### Prerequisites
+- Google AI Studio API Key
+- Google Custom Search API Key (for fact-checking features)
+
+### Steps
+
+#### 1. Obtain API Keys
+Get your API keys from:
+- [Google AI Studio](https://aistudio.google.com/) for Gemini models
+- [Google Custom Search API](https://developers.google.com/custom-search/v1/overview) for web search
+
+#### 2. Set up the server
+```bash
+# Clone the repository
+git clone https://github.com/your-username/curios.git
+cd curios
+
+# Create .env file
+echo "GEMINI_API_KEY=your_gemini_api_key_here" > .env
+echo "GOOGLE_CSE_ID=your_custom_search_engine_id" >> .env
+echo "GOOGLE_API_KEY=your_google_api_key_here" >> .env
+
+# Install dependencies and run
+npm install
+npm start
+```
+
+The server will start on http://localhost:3000
+
+#### 3. Install browser extension
+1. Open Chrome/Edge browser
+2. Go to Extensions page (chrome://extensions/)
+3. Enable "Developer mode"
+4. Click "Load unpacked" and select the project folder
+
+#### 4. Test the extension
+1. Go to any webpage
+2. Long press (or double-click and hold) on any text
+3. Wait for the AI analysis overlay to appear
 
 ## Current Limitations and Notes
 
