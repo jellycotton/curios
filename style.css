@@ -9,46 +9,6 @@
   margin: 20px auto;
 }
 
-/* 代替スピナー - ドット型（よりモダンな見た目） */
-.spinner-dots {
-  display: inline-block;
-  position: relative;
-  width: 36px;
-  height: 36px;
-  margin: 20px auto;
-}
-
-.spinner-dots div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #007bff;
-  animation: spinner-dots 1.2s linear infinite;
-}
-
-.spinner-dots div:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translate(16px, 0) rotate(0deg); }
-.spinner-dots div:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translate(16px, 0) rotate(-45deg); animation-delay: 0.15s; }
-.spinner-dots div:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translate(16px, 0) rotate(-90deg); animation-delay: 0.3s; }
-.spinner-dots div:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translate(16px, 0) rotate(-135deg); animation-delay: 0.45s; }
-.spinner-dots div:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translate(16px, 0) rotate(-180deg); animation-delay: 0.6s; }
-.spinner-dots div:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translate(16px, 0) rotate(-225deg); animation-delay: 0.75s; }
-.spinner-dots div:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translate(16px, 0) rotate(-270deg); animation-delay: 0.9s; }
-.spinner-dots div:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translate(16px, 0) rotate(-315deg); animation-delay: 1.05s; }
-
-@keyframes spinner-dots {
-  0%, 20%, 80%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(0.5);
-    opacity: 0.5;
-  }
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
