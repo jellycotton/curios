@@ -2,7 +2,7 @@
 
 🇯🇵 日本語版 → [README.md](./README.md)
 
-![Curios Demo](./demo.gif)
+![Curios Demo](./DemoAnimation.gif)
 *↑ Long-press for AI analysis, instant overlay display*
 
 # One Action
@@ -90,12 +90,6 @@ Free tiers, pay-as-you-go, and monthly plans differ by service and configuration
 Examples:
 - https://cloud.google.com/vertex-ai/pricing
 - https://developers.google.com/custom-search/v1/overview
-
-## Demo
-
-Below is a demo of Curios in action.
-
-![Curios Demo](./demo.gif)
 
 ## Overview
 Currently, Curios operates as a browser extension that performs fact-checking on web page text using Google Generative AI (gemini-2.5-pro, gemini-2.5-flash, etc.) and Google Custom Search API.  
