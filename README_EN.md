@@ -3,7 +3,7 @@
 🇯🇵 日本語版 → [README.md](./README.md)
 
 ![Curios Demo](./DemoAnimation.gif)
-*↑ Long-press for AI analysis, instant overlay display*
+*↑ Right-click and hold for AI analysis, instant overlay display*
 
 # One Action
 One hand, long press, overlay
@@ -72,7 +72,7 @@ The server will start on http://localhost:3000
 
 #### 4. Test the extension
 1. Go to any webpage
-2. Long press (or double-click and hold) on any text
+2. Right-click and hold on any text
 3. Wait for the AI analysis overlay to appear
 
 ## Current Limitations and Notes

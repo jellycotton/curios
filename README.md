@@ -3,7 +3,7 @@
 🇺🇸 English version → [README_EN.md](./README_EN.md)
 
 ![Curios Demo](./DemoAnimation.gif)
-*↑ 長押しでAI分析、その場でオーバーレイ表示*
+*↑ 右ボタン長押しでAI分析、その場でオーバーレイ表示*
 
 # ワンアクション
 片手、長押し、オーバーレイ
@@ -52,7 +52,7 @@ Google Gemini APIおよびGoogle Custom Search APIの利用には、Google Cloud
 
 ## 概要
 現在のCuriosは、Google Generative AI (gemini-2.5-pro, gemini-2.5-flash など) とGoogle Custom Search APIを用いてWebページ上のテキストのファクトチェックを行うブラウザ拡張機能として動作します。
-ユーザーが選択したテキストや長押ししたテキストについて情報の真偽を検証し、その結果をWebページ上にオーバーレイ表示します。
+ユーザーが選択したテキストや右ボタンで長押ししたテキストについて情報の真偽を検証し、その結果をWebページ上にオーバーレイ表示します。
 
 ## 補足
 Curiosはファクトチェックデモを例示として搭載していますが、
