@@ -25,9 +25,7 @@ Through this framework, you can bring your curiosity to life by experimenting wi
 This project was conceived and designed by me (Jelly),  
 and almost all the implementation, refinement, and adjustment were shaped with the help of AI assistants.
 
-I am a developer with no prior knowledge.
-
-That’s why I use tools like AI,  
+I use tools like AI,  
 learning, trying, and transforming ideas into reality as I go.
 
 Curios is one example of such practice.
