@@ -15,7 +15,16 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 const port = 3000;
 
-app.use(cors());
+// 拡張機能からのリクエストのみ許可(任意のWebサイトが手元サーバーのAPI枠を勝手に使うのを防ぐ)
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin.startsWith('chrome-extension://')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
 
 // Custom Search APIの設定
 const CUSTOM_SEARCH_API_KEY = process.env.CUSTOM_SEARCH_API_KEY;

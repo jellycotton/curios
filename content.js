@@ -14,6 +14,16 @@ let lastMousePosition = { x: 0, y: 0 };
 let pressTimer = null;
 let isLongPressing = false;
 let selectedText = '';
+// 直前のオーバーレイが閉じられずに次のオーバーレイへ差し替わったとき、
+// documentに残ったままになるkeydownリスナーを追跡して確実に外すため
+let activeEscapeHandler = null;
+
+function clearActiveEscapeHandler() {
+  if (activeEscapeHandler) {
+    document.removeEventListener('keydown', activeEscapeHandler);
+    activeEscapeHandler = null;
+  }
+}
 
 // ★ オーバーレイ表示の設定値
 const LONG_PRESS_TIME = 400; // 長押し時間を短縮（より反応的に）
@@ -193,14 +203,15 @@ function createLoadingOverlay(position) {
 function displayLoadingOverlay(position) {
   const existingOverlay = document.getElementById("curios-overlay");
   const existingBackdrop = document.getElementById("curios-backdrop") || document.getElementById("curios-loading-backdrop");
-  
+
   if (existingOverlay) {
     existingOverlay.remove();
   }
   if (existingBackdrop) {
     existingBackdrop.remove();
   }
-  
+  clearActiveEscapeHandler();
+
   // デバッグ: 位置情報をコンソールに出力
   console.log(`Loading overlay position: x=${position.x}, y=${position.y}, screen: ${window.innerWidth}x${window.innerHeight}`);
   
@@ -246,23 +257,24 @@ function displayLoadingOverlay(position) {
     setTimeout(() => {
       if (overlay.parentNode) overlay.remove();
       if (backdrop.parentNode) backdrop.remove();
-      document.removeEventListener('keydown', loadingEscapeHandler);
+      clearActiveEscapeHandler();
     }, 300);
   };
-  
+
   // バックドロップを先に追加
   document.body.appendChild(backdrop);
   document.body.appendChild(overlay);
-  
+
   // バックドロップクリックで閉じる
   backdrop.addEventListener('click', closeLoadingOverlay);
-  
+
   // Escapeキーでも閉じられるように
   const loadingEscapeHandler = (e) => {
     if (e.key === 'Escape') {
       closeLoadingOverlay();
     }
   };
+  activeEscapeHandler = loadingEscapeHandler;
   document.addEventListener('keydown', loadingEscapeHandler);
 }
 
@@ -291,7 +303,8 @@ function displayOverlay(result, position) {
     existingBackdrop.style.opacity = "0";
     setTimeout(() => existingBackdrop.remove(), 300);
   }
-  
+  clearActiveEscapeHandler();
+
   // ★ コンテンツの長さに基づく動的サイズ調整
   const estimatedContentHeight = estimateContentHeight(result);
   
@@ -338,7 +351,7 @@ function displayOverlay(result, position) {
       setTimeout(() => {
         if (overlay.parentNode) overlay.remove();
         if (backdrop.parentNode) backdrop.remove();
-        document.removeEventListener('keydown', escapeHandler);
+        clearActiveEscapeHandler();
       }, 300);
     };
 
@@ -354,6 +367,7 @@ function displayOverlay(result, position) {
         closeOverlay();
       }
     };
+    activeEscapeHandler = escapeHandler;
     document.addEventListener('keydown', escapeHandler);
     
     document.getElementById("curios-copy-btn").onclick = () => {
@@ -523,21 +537,31 @@ function createResultOverlay(result, originalPosition, loadingPosition) {
   return overlay;
 }
 
+// AI応答・Web検索結果由来の文字列をHTMLとして解釈させないためのエスケープ
+function escapeHtml(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function parseAndStyleResult(rawResult) {
     let html = '';
     // エラーメッセージを検出した場合の特別な処理
     if (rawResult.includes('【評価】: エラー') || rawResult.includes('エラー')) {
         return `<div style="background-color: #dc3545; color: white; padding: 15px; border-radius: 8px; text-align: center;">
                     <p style="font-weight: bold; font-size: 16px;">⚠️ ファクトチェックエラー</p>
-                    <p style="font-size: 14px;">${rawResult.replace(/\n/g, '<br>')}</p>
+                    <p style="font-size: 14px;">${escapeHtml(rawResult).replace(/\n/g, '<br>')}</p>
                 </div>`;
     }
 
     const sections = rawResult.split(/【(.*?)】:/).filter(Boolean);
 
     for (let i = 0; i < sections.length; i += 2) {
-        const title = sections[i]?.trim();
-        let content = sections[i + 1]?.trim().replace(/\n/g, '<br>'); // 改行を<br>に
+        const title = escapeHtml(sections[i]?.trim() ?? '');
+        let content = escapeHtml(sections[i + 1]?.trim() ?? '').replace(/\n/g, '<br>'); // 改行を<br>に
         if (!title || !content) continue;
         
         let color = '#333';
@@ -566,7 +590,7 @@ function parseAndStyleResult(rawResult) {
              html += `<div style="text-align: left; margin-top: 15px; padding: 10px; border-left: 3px solid #007bff; background-color: rgba(0, 123, 255, 0.05);"><strong style="display: block; margin-bottom: 5px;">【${title}】</strong>${content}</div>`;
         }
     }
-    return html || `<p>${rawResult.replace(/\n/g, '<br>')}</p>`; // パースできなかった場合はそのまま表示
+    return html || `<p>${escapeHtml(rawResult).replace(/\n/g, '<br>')}</p>`; // パースできなかった場合はそのまま表示
 }
 
 // --- クリーンアップとメモリ管理 ---
@@ -578,6 +602,11 @@ document.addEventListener('visibilitychange', () => {
     if (overlay) {
       overlay.remove();
     }
+    const backdrop = document.getElementById("curios-backdrop") || document.getElementById("curios-loading-backdrop");
+    if (backdrop) {
+      backdrop.remove();
+    }
+    clearActiveEscapeHandler();
     if (pressTimer) {
       clearTimeout(pressTimer);
       pressTimer = null;
